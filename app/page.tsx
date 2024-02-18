@@ -112,7 +112,7 @@ export default async function Home({
         previousFrame={previousFrame}
       >
         {/* <FrameImage src="https://framesjs.org/og.png" /> */}
-        <FrameImage aspectRatio="1.91:1" src={image}></FrameImage>
+        <FrameImage aspectRatio="1:1" src={image}></FrameImage>
         <FrameInput text="put some text here" />
         <FrameButton>
           {state?.active === "1" ? "Active" : "Inactive"}
