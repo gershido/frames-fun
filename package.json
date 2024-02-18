@@ -11,6 +11,7 @@
     "update-framesjs": "yarn upgrade frames.js@latest && yarn run update-debugger"
   },
   "dependencies": {
+    "@hatsprotocol/sdk-v1-core": "^0.8.1",
     "@noble/ed25519": "^2.0.0",
     "frames.js": "^0.5.1",
     "next": "14.1.0",
@@ -18,7 +19,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "satori": "^0.10.13",
-    "swr": "^2.2.4"
+    "swr": "^2.2.4",
+    "viem": "^2.7.10"
   },
   "engines": {
     "node": ">=18.17.0"

@@ -10,7 +10,11 @@ import {
   useFramesReducer,
 } from "frames.js/next/server";
 import Link from "next/link";
+import Image from "next/image";
 import { DEBUG_HUB_OPTIONS } from "./debug/constants";
+import { createPublicClient, http } from "viem";
+import { sepolia } from "viem/chains";
+import { HatsClient, hatIdHexToDecimal } from "@hatsprotocol/sdk-v1-core";
 
 type State = {
   active: string;
@@ -52,6 +56,24 @@ export default async function Home({
   // Here: do a server side side effect either sync or async (using await), such as minting an NFT if you want.
   // example: load the users credentials & check they have an NFT
 
+  const publicClient = createPublicClient({
+    chain: sepolia,
+    transport: http(),
+  });
+  const client = new HatsClient({ chainId: 11155111, publicClient });
+
+  const hatDetails = await client.viewHat(
+    hatIdHexToDecimal(
+      "0x0000005700000000000000000000000000000000000000000000000000000000"
+    )
+  );
+
+  let image =
+    "https://ipfs.io/ipfs/bafkreiflezpk3kjz6zsv23pbvowtatnd5hmqfkdro33x5mh2azlhne3ah4";
+  if (hatDetails.imageUri.startsWith("ipfs://")) {
+    image = "https://ipfs.io/ipfs/" + hatDetails.imageUri.slice(7);
+  }
+
   console.log("info: state is:", state);
 
   if (frameMessage) {
@@ -90,11 +112,7 @@ export default async function Home({
         previousFrame={previousFrame}
       >
         {/* <FrameImage src="https://framesjs.org/og.png" /> */}
-        <FrameImage aspectRatio="1.91:1">
-          <div tw="w-full h-full bg-slate-700 text-white justify-center items-center">
-            {frameMessage?.inputText ? frameMessage.inputText : "Hello world"}
-          </div>
-        </FrameImage>
+        <FrameImage aspectRatio="1.91:1" src={image}></FrameImage>
         <FrameInput text="put some text here" />
         <FrameButton>
           {state?.active === "1" ? "Active" : "Inactive"}
