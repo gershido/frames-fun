@@ -73,6 +73,7 @@ export default async function Home({
   if (hatDetails.imageUri.startsWith("ipfs://")) {
     image = "https://ipfs.io/ipfs/" + hatDetails.imageUri.slice(7);
   }
+  console.log("image:", image);
 
   console.log("info: state is:", state);
 
@@ -112,16 +113,48 @@ export default async function Home({
         previousFrame={previousFrame}
       >
         {/* <FrameImage src="https://framesjs.org/og.png" /> */}
-        <FrameImage aspectRatio="1:1" src={image}></FrameImage>
-        <FrameInput text="put some text here" />
-        <FrameButton>
-          {state?.active === "1" ? "Active" : "Inactive"}
-        </FrameButton>
-        <FrameButton>
-          {state?.active === "2" ? "Active" : "Inactive"}
-        </FrameButton>
-        <FrameButton action="link" target={`https://www.google.com`}>
-          External
+        <FrameImage aspectRatio="1:1">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "nowrap",
+              justifyContent: "space-between",
+              alignItems: "center",
+              position: "absolute",
+              left: "0px",
+              right: "0px",
+              top: "0px",
+            }}
+          >
+            <img
+              src={image}
+              alt="hat image"
+              style={{
+                border: "1px solid",
+                maxWidth: "85%",
+                maxHeight: "85%",
+              }}
+            ></img>
+            <div
+              style={{
+                flex: "1 0 auto",
+                textAlign: "center",
+                maxWidth: "100%",
+                fontSize: "64px",
+              }}
+            >
+              Hello!
+            </div>
+          </div>
+        </FrameImage>
+
+        <FrameButton>{state.total_button_presses}</FrameButton>
+        <FrameButton
+          action="link"
+          target={`https://app.hatsprotocol.xyz/trees/11155111/87?hatId=87`}
+        >
+          View in app
         </FrameButton>
       </FrameContainer>
     </div>
