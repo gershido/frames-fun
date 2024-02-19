@@ -113,41 +113,7 @@ export default async function Home({
         previousFrame={previousFrame}
       >
         {/* <FrameImage src="https://framesjs.org/og.png" /> */}
-        <FrameImage aspectRatio="1:1">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              flexWrap: "nowrap",
-              justifyContent: "space-between",
-              alignItems: "center",
-              position: "absolute",
-              left: "0px",
-              right: "0px",
-              top: "0px",
-            }}
-          >
-            <img
-              src={image}
-              alt="hat image"
-              style={{
-                border: "1px solid",
-                maxWidth: "85%",
-                maxHeight: "85%",
-              }}
-            ></img>
-            <div
-              style={{
-                flex: "1 0 auto",
-                textAlign: "center",
-                maxWidth: "100%",
-                fontSize: "64px",
-              }}
-            >
-              Hello!
-            </div>
-          </div>
-        </FrameImage>
+        <FrameImage aspectRatio="1:1" src={image}></FrameImage>
 
         <FrameButton>{state.total_button_presses}</FrameButton>
         <FrameButton
